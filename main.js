@@ -14,20 +14,23 @@ function loaded() {
   		deleteAll();
 	    showText();
   	});
-  $("#formText").bind("keydown keyup keypress change",
-  	function(){
-  		var thisValueLength = $(this).val().length;
-  		$("#counter").html(thisValueLength);
-  	});
+  $("#formText").bind("keydown keyup keypress change",str_counter);
+}
+
+function str_counter(){
+  var thisValueLength = $("#formText").val().length;
+  $("#counter").html(thisValueLength + "/20");
 }
 
 function deleteAll(){
-	// すべてのTodoを削除しても良いかを確認する
-	if(checkDeleteAll()){
-		// すべてのTodoを削除する
-		localStorage.clear();
-		alert("すべてのTodoを削除したよ");
-	}
+  if (localStorage.length > 0) {
+  	// すべてのTodoを削除しても良いかを確認する
+  	if (checkDeleteAll()){
+  		// すべてのTodoを削除する
+  		localStorage.clear();
+  		alert("すべてのTodoを削除したよ");
+  	}
+  }
 }
 
 function checkDeleteAll(){
@@ -40,10 +43,12 @@ function saveText() {
   // 時刻をキーにして入力されたテキストを保存する
   var text = $("#formText");
   var time = new Date();
-  // 先にエスケープした場合、エスケープ文字が文字数としてカウントされてしまう
-  var val = escapeText(text.val());
-  if(checkText(val)){
-	  localStorage.setItem(time, text.val());
+  var time_json = JSON.stringify(time);
+  var input_str = text.val();
+  if(checkText(input_str)){
+    // 先にエスケープした場合、エスケープ文字が文字数としてカウントされてしまう
+    escaped_text = escapeText(input_str);
+	  localStorage.setItem(time_json, escaped_text);
 	  alert("登録完了");
 	  // テキストボックスを空にする
 	  text.val("");
@@ -93,11 +98,38 @@ function showText() {
   }
   // ローカルストレージに保存された値すべてを要素に追加する
   var key, value, html = [];
-  for(var i=0, len=localStorage.length; i<len; i++) {
+  for (var i=localStorage.length-1;i>=0;i--){
     key = localStorage.key(i);
+    var date = new Date(JSON.parse(key));
     value = localStorage.getItem(key);
 
-    html.push("<p>" + key + ":" + value + "</p>");
-  }
+    var todo = "<div class='item_contents'>";
+    todo += "<span class='content'>" + value + "</span>";
+    todo += "<span class='date'><i class='fa fa-fw fa-calendar'></i>&nbsp;" + date + "</span>";
+    todo += "</div>";
+    todo += "<div class='change_state'>";
+    //todo += "<span class='done'>" + "<i class='fa fa-fw fa-check-square-o'></i>&nbsp;" + "DONE?" + "</span>"
+    todo += "<span class='delete'>" + "<i class='fa fa-fw fa-times'></i>&nbsp;" + "DELETE?" + "</span>"
+    todo += "</div>";
+
+    var code = "<li>";
+    code += todo;
+    code += "</li>";
+    html.push(code);
+ }
+  // 配列の中身を文字列として連結
   list.append(html.join(''));
+
+  $(".delete").on("click",function(){
+    var elems = $("#list li span.delete");
+    var len = elems.length;
+    var idx = elems.index(this);
+    var key = localStorage.key(len-idx-1);
+    var val = localStorage.getItem(key);
+    if (confirm("[" + val + "]を削除します")) {
+      localStorage.removeItem(key);
+      showText();
+    }
+  });
+  str_counter();
 }

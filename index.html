@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8" />
   <title>Todo List</title>
+  <link rel="stylesheet" href="main.css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
+  <header>
+  <h1 id="tool_title">Todo List</h1>
+  </header>
   <div id="form">
-    <input id="formText" type="text" size="50" maxlength="20">
+    <input id="formText" type="text" size="50" maxlength="20" placeholder="ご飯を食べる">
     <input id="formButton" type="button" value="追加">
     <div id="counter"></div>
   </div>
-  <h2 id="list_title">todolist</h2>
   <p id="notice"></p>
-  <div id="list"></div>
+  <ul id="list"></ul>
   <input id="deleteAllButton" type="button" value="すべて消去">
-  <div><p>入力された内容は、ローカルにだけ保存されています。サーバには送信されていません。</p></div>
-  <footer><p>copyright kohki yamagiwa</p></footer>
+  <div>
+  <p><i class='fa fa-info-circle'></i>&nbsp;入力された内容は、ローカルにだけ保存されています。サーバには送信されていません。</p>
+  <p><i class='fa fa-info-circle'></i>&nbsp;Google Chrome 36.0.1985.143で動作確認しています。</p>
+  </div>
+  <footer>
+  <p><small>Copyright &copy; Kohki YAMAGIWA all rights reserved.</small></p>
+  <address>kohki.yamagiwa*gmail.com</address>
+  </footer>
+
   <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
   <script src="main.js"></script>
 </body>
