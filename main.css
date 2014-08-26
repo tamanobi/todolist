@@ -9,11 +9,11 @@ h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
 #tool_title{font-size:100%;}
 #todo_num{font-size:50%;}
 #form{margin:0 auto;width:98%;}
-#formText{display:block;font-size:180%;width:100%;}
+#formText{display:block;font-size:160%;width:100%;}
 #notice{margin:0;padding:0;text-align:center;}
 #counter{display:inline;}
 #list{list-style:none;margin:0;padding:0;}
-#list li{margin:0;padding:0;position:relative;left:0;background-color:white; -webkit-transition:0.5s ease;overflow:hidden;}
+#list li{margin:0;padding:0;position:relative;left:0;background-color:white; -webkit-transition:0.5s ease;overflow:hidden;opacity:1;}
 #list li:nth-child(odd){background-color:#e0e0e0;}
 #list li:nth-child(even){background-color:#eee;}
 #list li:hover{background-color:#ffffad;cursor:pointer;}
@@ -28,6 +28,7 @@ span.delete:hover{background-color:#ff6f6f;}
 .item_contents{padding:8px;}
 .change_state{display:none;position:relative;overflow:hidden;}
 .change_state span{display:block;}
-#deleteAllButton{width:100%;font-size:150%;}
-footer{background-color:black;color:white;}
+#at{width:98%;margin:0 auto;text-align: center;}
+#deleteAllButton{font-size:150%;}
+footer{background-color:white;color:black;text-align: center;}
 address{margin:0;padding:0;}
