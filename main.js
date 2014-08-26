@@ -98,7 +98,7 @@ function showText() {
   }
   // ローカルストレージに保存された値すべてを要素に追加する
   var key, value, html = [];
-  for (var i=localStorage.length-1;i>=0;i--){
+  for (var i=0, len=localStorage.length;i<len;i++){
     key = localStorage.key(i);
     var date = new Date(JSON.parse(key));
     value = localStorage.getItem(key);
@@ -116,10 +116,18 @@ function showText() {
     code += todo;
     code += "</li>";
     html.push(code);
- }
+  }
+  // ソートする
+  
   // 配列の中身を文字列として連結
+  console.log(html.join(''));
   list.append(html.join(''));
-
+  $(".item_contents").on("click",function(){
+      var nxt = $(this).next();
+      nxt.css("height", nxt.height()+"px");
+      nxt.slideToggle();
+      nxt.css("height", "");
+  });
   $(".delete").on("click",function(){
     var elems = $("#list li span.delete");
     var len = elems.length;

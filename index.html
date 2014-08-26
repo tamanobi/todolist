@@ -5,11 +5,16 @@
   <title>Todo List</title>
   <link rel="stylesheet" href="main.css">
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
 </head>
 <body>
-  <header>
+  <header id="tool_header">
+  <div></div>
   <h1 id="tool_title">Todo List</h1>
   </header>
+  <!--<p id="todo_num">100</p>-->
   <div id="form">
     <input id="formText" type="text" size="50" maxlength="20" placeholder="ご飯を食べる">
     <input id="formButton" type="button" value="追加">
@@ -22,7 +27,7 @@
   <p><i class='fa fa-info-circle'></i>&nbsp;入力された内容は、ローカルにだけ保存されています。サーバには送信されていません。</p>
   <p><i class='fa fa-info-circle'></i>&nbsp;Google Chrome 36.0.1985.143で動作確認しています。</p>
   </div>
-  <footer>
+  <footer id="tool_footer">
   <p><small>Copyright &copy; Kohki YAMAGIWA all rights reserved.</small></p>
   <address>kohki.yamagiwa*gmail.com</address>
   </footer>
