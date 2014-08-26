@@ -45,6 +45,7 @@ function saveText() {
   var time = new Date();
   var time_json = JSON.stringify(time);
   var input_str = text.val();
+
   if(checkText(input_str)){
     // 先にエスケープした場合、エスケープ文字が文字数としてカウントされてしまう
     escaped_text = escapeText(input_str);
@@ -83,6 +84,11 @@ function checkText(_text){
 	return true;
 }
 
+var Todo = function (_created, _contents){
+  this.created = _created;
+  this.contents = _contents;
+};
+
 // ローカルストレージに保存した値を再描画する
 function showText() {
   // すでにある要素を削除する
@@ -92,13 +98,13 @@ function showText() {
   var len = localStorage.length;
   var notice_message = "";
   if (len === 0) {
-	  $("#notice").text("Todoは登録されていないよ！");
+	  $("#notice").text("タスクはありません");
   } else {
-	  $("#notice").text("Todoが"+localStorage.length + "個登録されているよ！");
+    $("#notice").text("残りタスク: "+localStorage.length);
   }
   // ローカルストレージに保存された値すべてを要素に追加する
   var key, value, html = [];
-  for (var i=0, len=localStorage.length;i<len;i++){
+  for (var i=0, len=localStorage.length; i<len; i++){
     key = localStorage.key(i);
     var date = new Date(JSON.parse(key));
     value = localStorage.getItem(key);
@@ -108,7 +114,7 @@ function showText() {
     todo += "<span class='date'><i class='fa fa-fw fa-calendar'></i>&nbsp;" + date + "</span>";
     todo += "</div>";
     todo += "<div class='change_state'>";
-    //todo += "<span class='done'>" + "<i class='fa fa-fw fa-check-square-o'></i>&nbsp;" + "DONE?" + "</span>"
+    todo += "<span class='done'>" + "<i class='fa fa-fw fa-check-square-o'></i>&nbsp;" + "DONE?" + "</span>"
     todo += "<span class='delete'>" + "<i class='fa fa-fw fa-times'></i>&nbsp;" + "DELETE?" + "</span>"
     todo += "</div>";
 
@@ -118,17 +124,23 @@ function showText() {
     html.push(code);
   }
   // ソートする
-  
   // 配列の中身を文字列として連結
-  console.log(html.join(''));
-  list.append(html.join(''));
-  $(".item_contents").on("click",function(){
+  list.append(html.reverse().join(''));
+
+  // クリックによるアコーディオンカーテン
+  $("#list .item_contents").on("click",function(){
       var nxt = $(this).next();
+      var elms = $("#list .change_state");
+      var idx = elms.index(nxt);
       nxt.css("height", nxt.height()+"px");
+      // クリックされた要素以外は閉じる
+      for(var j=0; j<elms.length; j++){
+        if(j !== idx) elms.eq(j).slideUp();
+      }
       nxt.slideToggle();
       nxt.css("height", "");
   });
-  $(".delete").on("click",function(){
+  $("#list .delete").on("click",function(){
     var elems = $("#list li span.delete");
     var len = elems.length;
     var idx = elems.index(this);

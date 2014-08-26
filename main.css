@@ -10,29 +10,24 @@ h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
 #todo_num{font-size:50%;}
 #form{margin:0 auto;width:98%;}
 #formText{display:block;font-size:180%;width:100%;}
-#notice{margin:0;padding:0;}
+#notice{margin:0;padding:0;text-align:center;}
 #counter{display:inline;}
 #list{list-style:none;margin:0;padding:0;}
 #list li{margin:0;padding:0;position:relative;left:0;background-color:white; -webkit-transition:0.5s ease;overflow:hidden;}
 #list li:nth-child(odd){background-color:#e0e0e0;}
 #list li:nth-child(even){background-color:#eee;}
 #list li:hover{background-color:#ffffad;cursor:pointer;}
-/*#list li:hover span{display:block;font-size:120%;}*/
-/*#list li:hover .change_state{display:block;font-size:120%;}*/
 span.content,span.date{display:block;}
 span.date{font-size:50%;}
 span.content,span.date{-webkit-transition:0.2s ease;}
-span.delete,span.done{display:block;padding:8px;}
+span.delete,span.done{display:block;padding:8px;-webkit-transition:0.3s ease;}
 span.done{background-color:#deffde;color:black;}
 span.delete{background-color:#ffdede;color:black;}
 span.done:hover{background-color:#6fff6f;}
 span.delete:hover{background-color:#ff6f6f;}
 .item_contents{padding:8px;}
-/*.change_state{display:none;-webkit-transition:0.3s ease;opacity:1;}*/
 .change_state{display:none;position:relative;overflow:hidden;}
 .change_state span{display:block;}
-/*li:hover .change_state{opacity:1;}*/
-/*#tool_footer{position:fixed;bottom:0;width:100%;}*/
 #deleteAllButton{width:100%;font-size:150%;}
 footer{background-color:black;color:white;}
 address{margin:0;padding:0;}
